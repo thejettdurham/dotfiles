@@ -1,0 +1,206 @@
+(defsrc
+  esc   f1    f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12
+  `  1    2    3    4    5       6    7    8    9    0       -    =    bspc
+  tab            q    w    e    r    t       y    u    i    o    p       [    ]    \ 
+  caps           a    s    d    f    g       h    j    k    l    ;       '    ret
+  lsft        z    x    c    v    b       n    m    ,    .    /       rsft
+  fn lctl           lalt lmet          spc            rmet ralt
+)
+
+;; This file includes sensitive key bindings that should not be committed to the repo
+(include env.kbd)
+
+(defcfg
+  process-unmapped-keys yes 
+  concurrent-tap-hold yes
+
+  ;;macos-dev-names-exclude (
+    ;;"Voyager"
+  ;;)
+)
+
+(defvar
+  ;; Note: consider using different time values for your different fingers.
+  ;; For example, your pinkies might be slower to release keys and 
+  ;; fingers faster.
+  tap-time 135
+  hold-time 135 
+  hold-time-slow 250
+
+  combo-term 20
+  combo-term-slow 35
+
+  mouse-wheel-interval 100
+  mouse-wheel-distance 120
+  mouse-move-interval 100
+  mouse-move-accel-time 1000
+  mouse-move-accel-min 1
+  mouse-move-accel-max 500
+
+  charmod-term 55
+  charmodslow-term 85
+
+  left-hand-keys (
+    q w e r t
+    a s d f g
+    z x c v b
+  )
+  right-hand-keys (
+    y u i o p
+    h j k l ;
+    n m , . /
+  )
+)
+
+(deftemplate charmod (char mod)
+  (switch 
+    ((key-timing 3 less-than $charmod-term)) $char break
+    () (tap-hold-release $tap-time $hold-time $char $mod) break
+  )
+)
+
+(deftemplate charmodslow (char mod)
+  (switch 
+    ((key-timing 3 less-than $charmodslow-term)) $char break
+    () (tap-hold-release $tap-time $hold-time-slow $char $mod ) break
+  )
+)
+
+(defalias
+  l_mod (layer-while-held mod)
+  l_numsym (layer-while-held numsym)
+  l_hax (layer-while-held hax)
+
+  switch_to_plain (layer-switch plain)
+  switch_to_base (layer-switch base)
+
+  ;; Home Row mods Left
+  ;;esc (t! charmodslow esc @l_mod)
+  a (t! charmodslow a @l_mod)
+  s (t! charmodslow s lalt)
+  d (t! charmod d lsft)
+  f (t! charmod f lmet)
+  g (t! charmod g lctl)
+
+  ;; Home Row Mods Right
+  h (t! charmod h rctl)
+  j (t! charmod j rmet)
+  k (t! charmod k rsft)
+  l (t! charmodslow l ralt)
+  ; (t! charmodslow ; @l_mod)
+  ;;' (t! charmodslow ' @l_mod)
+
+  ;; z (t! charmodslow z @l_numsym)
+  ;; / (t! charmodslow / @l_numsym)
+  n (t! charmodslow n @l_numsym)
+  v (t! charmodslow v @l_numsym)
+
+  p (t! charmodslow p @l_hax)
+
+  ret (t! charmod ret lsft)
+
+  spcft (tap-hold-release $tap-time $hold-time spc lsft)
+  bspcmet (tap-hold $tap-time $hold-time bspc lmet)
+
+  ;; mod layer mods
+  modtab (t! charmodslow tab lalt)
+  modspc (t! charmod spc lsft)
+  modent (t! charmod enter lmet)
+
+  ;; numsym layer mods
+  ns-s (t! charmodslow 4 lalt)
+  ns-d (t! charmod 5 lsft)
+  ns-f (t! charmod 6 lmet)
+  ns-g (t! charmod g lctl)
+  ns-j (t! charmod S-9 rmet)
+  ns-k (t! charmod S-0 rsft)
+
+  ;; mod layer mods
+
+  tabback (t! charmodslow M-S-[ lalt)
+  emoji (t! charmod fn lsft)
+  tabfwd (t! charmod M-S-] lmet)
+
+  ;; mod macros
+  brace (macro S-[ 100 S-] 100 left)
+  brack (macro [ 100 ] 100 left)
+  tag (macro S-, 100 S-. 100 left 100 left)
+  paren (macro S-9 100 S-0 100 left)
+  tick (macro ` 100 ` 100 left)
+  squot (macro ' 100 ' 100 left)
+  dquot (macro S-' 100 S-' 100 left)
+
+  ;; misc
+  ossft (one-shot-press 2000 lsft)
+)
+
+;; Combos
+(defchordsv2
+  (spc h) ` $combo-term all-released  (mod numsym hax)
+  (spc j) - $combo-term all-released  (mod numsym hax)
+  (spc k) = $combo-term all-released  (mod numsym hax)
+  (spc l) \ $combo-term all-released  (mod numsym hax)
+  (spc ;) ; $combo-term all-released  (mod numsym hax)
+  (spc n) ' $combo-term all-released  (mod numsym hax)
+  (spc m) ' $combo-term all-released  (mod numsym hax)
+
+  (spc a) esc $combo-term all-released (mod numsym hax)
+  ;; (spc v) esc $combo-term all-released (mod numsym hax)
+  (spc s) tab $combo-term all-released (mod numsym hax)
+  (spc f) ret $combo-term all-released (mod numsym hax)
+
+  (lmet rmet) (caps-word-toggle 3000) $combo-term-slow all-released (mod numsym hax)
+
+  (z rmet) @l_numsym $combo-term all-released (mod numsym hax)
+  (/ rmet) @l_numsym $combo-term all-released (mod numsym hax)
+  (a rmet) @l_mod $combo-term all-released (mod numsym hax)
+  (; rmet) @l_mod $combo-term all-released (mod numsym hax)
+
+  (1 2 - =) @switch_to_plain $combo-term all-released (mod numsym hax plain)
+  (1 2 [ ]) @switch_to_base $combo-term all-released (mod numsym hax base)
+)
+
+(deflayer base
+  esc     🔅    🔆    XX   XX  XX  XX  ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
+  ` 1 2 3 4 5 6          7 8 9 0 - = bspc
+  tab q  w  e  r  t            y u i o @p [ ] \
+  @ossft @a @s @d @f @g            @h @j @k @l @; @ossft ret
+  @ossft z  x  c  @v  b            @n m , . / @ossft
+  XX XX XX @bspcmet   spc    @ret XX
+)
+
+(deflayer mod
+  esc     🔅    🔆  XX   XX  XX           XX  ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
+  XX  XX  XX  XX  XX  XX  XX             XX XX XX XX XX XX XX
+  XX _ _ A-M-i  S-M-4       _                      ▶⏸ 🔉 up 🔊 🔇 XX XX XX 
+  XX _ @tabback @emoji @tabfwd bspc     bspc left down right _ _ XX 
+  XX _ tab spc ret del                     ret _ _ _ _ _
+  XX XX XX _    _       _ XX
+)
+
+(deflayer numsym
+  esc     🔅    🔆  XX   XX  XX   XX  ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
+  XX  XX  XX  XX  XX  XX  XX     XX XX XX XX XX XX bspc
+  XX _ 7 8 9 0                       _ [ ] S-[ S-] XX XX XX 
+  XX _ @ns-s @ns-d @ns-f @ns-g           _ @ns-j @ns-k S-, S-. _ XX
+  @ossft _ 1 2 3 .                       ` - = \ ' _
+  XX XX XX _              _          _ XX
+)
+
+(deflayer hax
+  esc     🔅    🔆    XX   XX  XX  XX  ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
+  ` @pw 2 3 4 5 6          7 8 9 0 - = bspc
+  tab q  w  e  r  t            y u i o p [ ] \
+  @ossft @a @s @d @f @g            @h @j @k @l @; @ossft ret
+  XX z  x  c  v  b            n m , . / XX
+  XX XX XX @bspcmet   spc    @ret XX
+)
+
+(deflayer plain
+  esc     🔅    🔆    XX   XX  XX  XX  ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
+  ` 1 2 3 4 5 6            7 8 9 0 - = bspc
+  tab q w e r t            y u i o p [ ] \
+  esc a s d f g            h j k l ; ' ret
+  lsft z x c v b           n m , . / rsft
+  fn lctl lalt lmet spc    rmet ralt
+)
