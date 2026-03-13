@@ -114,7 +114,19 @@ function applyHostsBlock(domains: string[], sourceFiles: string[]): void {
   console.log("Hosts file updated. Block lists:", sourceFiles.join(", "));
 }
 
+function restartChrome(): void {
+  try {
+    execSync(`osascript -e 'quit app "Google Chrome"'`, { stdio: "pipe" });
+    execSync("sleep 2", { stdio: "pipe" });
+    execSync('open -a "Google Chrome"', { stdio: "pipe" });
+    console.log("Chrome restarted (DNS cache cleared).");
+  } catch (err) {
+    console.warn("Could not restart Chrome:", (err as Error).message);
+  }
+}
+
 function main(): void {
+  const restartChromeFlag = process.argv.includes("--restart-chrome");
   const { domains: blocklist, sourceFiles } = loadBlocklist();
   const blockPage = loadBlockPage();
 
@@ -133,6 +145,8 @@ function main(): void {
   });
 
   applyHostsBlock(blocklist, sourceFiles);
+
+  if (restartChromeFlag) restartChrome();
 
   const handler = (
     _req: import("http").IncomingMessage,
@@ -163,7 +177,8 @@ function main(): void {
     console.log("HTTPS server listening on 127.0.0.1:443");
   });
 
-  console.log("\nWorkmode active. Press Ctrl+C to stop.\n");
+  console.log("\nWorkmode active. Press Ctrl+C to stop.");
+  console.log("Usage: npm run workmode [-- --restart-chrome]\n");
   console.log("If HTTPS shows certificate warnings, run:");
   console.log(`  CAROOT="${WORKMODE_DIR}" mkcert -install\n`);
 }
