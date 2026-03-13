@@ -111,7 +111,7 @@
   ns-s (t! charmodslow 4 lalt)
   ns-d (t! charmod 5 lsft)
   ns-f (t! charmod 6 lmet)
-  ns-g (t! charmod g lctl)
+  ns-g (t! charmod ' lctl)
   ns-j (t! charmod S-9 rmet)
   ns-k (t! charmod S-0 rsft)
 
@@ -174,7 +174,7 @@
   XX  XX  XX  XX  XX  XX  XX             XX XX XX XX XX XX XX
   XX _ _ A-M-i  S-M-4       _                      ▶⏸ 🔉 up 🔊 🔇 XX XX XX 
   XX _ @tabback @emoji @tabfwd bspc     bspc left down right _ _ XX 
-  XX _ tab spc ret del                     ret _ _ _ _ _
+  XX _ spc tab ret del                     del ret tab spc _ _
   XX XX XX _    _       _ XX
 )
 
@@ -182,7 +182,7 @@
   esc     🔅    🔆  XX   XX  XX   XX  ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
   XX  XX  XX  XX  XX  XX  XX     XX XX XX XX XX XX bspc
   XX _ 7 8 9 0                       _ [ ] S-[ S-] XX XX XX 
-  XX _ @ns-s @ns-d @ns-f @ns-g           _ @ns-j @ns-k S-, S-. _ XX
+  XX _ @ns-s @ns-d @ns-f @ns-g           ' @ns-j @ns-k S-, S-. _ XX
   @ossft _ 1 2 3 .                       ` - = \ ' _
   XX XX XX _              _          _ XX
 )
