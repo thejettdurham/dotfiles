@@ -173,7 +173,7 @@
   esc     🔅    🔆  XX   XX  XX           XX  ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
   XX  XX  XX  XX  XX  XX  XX             XX XX XX XX XX XX XX
   XX _ _ A-M-i  S-M-4       _                      ▶⏸ 🔉 up 🔊 🔇 XX XX XX 
-  XX _ @tabback @emoji @tabfwd bspc     bspc left down right _ _ XX 
+  XX esc @tabback @emoji @tabfwd bspc     bspc left down right esc _ XX 
   XX _ spc tab ret del                     del ret tab spc _ _
   XX XX XX _    _       _ XX
 )
