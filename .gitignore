@@ -2,6 +2,8 @@ kanata/env.kbd
 .DS_Store
 workmode/cert.pem
 workmode/key.pem
+workmode/rootCA.pem
+workmode/rootCA-key.pem
 workmode/block.d/*
 !workmode/block.d/.gitkeep
 !workmode/block.d/.example.json

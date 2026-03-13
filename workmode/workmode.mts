@@ -75,6 +75,13 @@ function loadBlockPage(): string {
 }
 
 function ensureMkcertCert(domains: string[]): { cert: string; key: string } {
+  const rootCA = join(WORKMODE_DIR, "rootCA.pem");
+  if (!existsSync(rootCA)) {
+    console.error("CA not found. First-time setup:");
+    console.error(`  CAROOT="${WORKMODE_DIR}" mkcert -install`);
+    console.error("This creates a local CA in workmode/ and adds it to your system trust store.");
+    process.exit(1);
+  }
   const certPath = join(WORKMODE_DIR, "cert.pem");
   const keyPath = join(WORKMODE_DIR, "key.pem");
   const san = ["localhost", "127.0.0.1", ...domains];
@@ -178,7 +185,8 @@ function main(): void {
   });
 
   console.log("\nWorkmode active. Press Ctrl+C to stop.");
-  console.log("Usage: npm run workmode [-- --restart-chrome]\n");
+  console.log("Usage: npm run workmode [-- --restart-chrome]");
+  console.log(`First run: CAROOT="${WORKMODE_DIR}" mkcert -install\n`);
   console.log("If HTTPS shows certificate warnings, run:");
   console.log(`  CAROOT="${WORKMODE_DIR}" mkcert -install\n`);
 }
