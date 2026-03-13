@@ -1,0 +1,16 @@
+{
+  "name": "dotfiles",
+  "version": "1.0.0",
+  "description": "Clone this repo and symlink the files to their relevant locations ✨",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "workmode": "node workmode/workmode.mts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^25.5.0"
+  }
+}
