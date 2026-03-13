@@ -92,7 +92,7 @@
 
   ;; z (t! charmodslow z @l_numsym)
   ;; / (t! charmodslow / @l_numsym)
-  n (t! charmodslow n @l_numsym)
+  m (t! charmodslow m @l_numsym)
   v (t! charmodslow v @l_numsym)
 
   p (t! charmodslow p @l_hax)
@@ -165,14 +165,14 @@
   ` 1 2 3 4 5 6          7 8 9 0 - = bspc
   tab q  w  e  r  t            y u i o @p [ ] \
   @ossft @a @s @d @f @g            @h @j @k @l @; @ossft ret
-  @ossft z  x  c  @v  b            @n m , . / @ossft
+  @ossft z  x  c  @v  b            n @m , . / @ossft
   XX XX XX @bspcmet   spc    @ret XX
 )
 
 (deflayer mod
   esc     🔅    🔆  XX   XX  XX           XX  ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
   XX  XX  XX  XX  XX  XX  XX             XX XX XX XX XX XX XX
-  XX _ _ A-M-i  S-M-4       _                      ▶⏸ 🔉 up 🔊 🔇 XX XX XX 
+  XX _ _ A-M-i  S-M-4       esc                      ▶⏸ 🔉 up 🔊 🔇 XX XX XX 
   XX esc @tabback @emoji @tabfwd bspc     bspc left down right esc _ XX 
   XX _ spc tab ret del                     del ret tab spc _ _
   XX XX XX _    _       _ XX
@@ -190,7 +190,7 @@
 (deflayer hax
   esc     🔅    🔆    XX   XX  XX  XX  ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
   ` @pw 2 3 4 5 6          7 8 9 0 - = bspc
-  tab q  w  e  r  t            y u i o p [ ] \
+  tab @pw  w  e  r  t            y u i o p [ ] \
   @ossft @a @s @d @f @g            @h @j @k @l @; @ossft ret
   XX z  x  c  v  b            n m , . / XX
   XX XX XX @bspcmet   spc    @ret XX
