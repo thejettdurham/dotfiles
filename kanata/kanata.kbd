@@ -92,8 +92,8 @@
 
   ;; z (t! charmodslow z @l_numsym)
   ;; / (t! charmodslow / @l_numsym)
-  m (t! charmodslow m @l_numsym)
-  v (t! charmodslow v @l_numsym)
+  m (t! charmod m @l_numsym)
+  v (t! charmod v @l_numsym)
 
   p (t! charmodslow p @l_hax)
 
@@ -151,10 +151,10 @@
 
   (lmet rmet) (caps-word-toggle 3000) $combo-term-slow all-released (mod numsym hax)
 
-  (z rmet) @l_numsym $combo-term all-released (mod numsym hax)
-  (/ rmet) @l_numsym $combo-term all-released (mod numsym hax)
-  (a rmet) @l_mod $combo-term all-released (mod numsym hax)
-  (; rmet) @l_mod $combo-term all-released (mod numsym hax)
+  (lmet spc) @l_numsym $combo-term all-released (mod numsym hax)
+  (rmet spc) @l_numsym $combo-term all-released (mod numsym hax)
+  ;;(spc lsft) @l_mod $combo-term all-released (mod numsym hax)
+  ;;(spc rmet) @l_mod $combo-term all-released (mod numsym hax)
 
   (1 2 - =) @switch_to_plain $combo-term all-released (mod numsym hax plain)
   (1 2 [ ]) @switch_to_base $combo-term all-released (mod numsym hax base)
