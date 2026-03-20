@@ -136,28 +136,28 @@
 
 ;; Combos
 (defchordsv2
-  (spc h) ` $combo-term all-released  (mod numsym hax)
-  (spc j) - $combo-term all-released  (mod numsym hax)
-  (spc k) = $combo-term all-released  (mod numsym hax)
-  (spc l) \ $combo-term all-released  (mod numsym hax)
-  (spc ;) ; $combo-term all-released  (mod numsym hax)
-  (spc n) ' $combo-term all-released  (mod numsym hax)
-  (spc m) ' $combo-term all-released  (mod numsym hax)
+  ;;(spc h) ` $combo-term all-released  (mod numsym hax)
+  ;;(spc j) - $combo-term all-released  (mod numsym hax)
+  ;;(spc k) = $combo-term all-released  (mod numsym hax)
+  ;;(spc l) \ $combo-term all-released  (mod numsym hax)
+  ;;(spc ;) ; $combo-term all-released  (mod numsym hax)
+  ;;(spc n) ' $combo-term all-released  (mod numsym hax)
+  ;;(spc m) ' $combo-term all-released  (mod numsym hax)
 
-  (spc a) esc $combo-term all-released (mod numsym hax)
-  ;; (spc v) esc $combo-term all-released (mod numsym hax)
-  (spc s) tab $combo-term all-released (mod numsym hax)
-  (spc f) ret $combo-term all-released (mod numsym hax)
+  ;;(spc a) esc $combo-term all-released (mod numsym hax)
+  ;;(spc v) esc $combo-term all-released (mod numsym hax)
+  ;;(spc s) tab $combo-term all-released (mod numsym hax)
+  ;;(spc f) ret $combo-term all-released (mod numsym hax)
 
-  (lmet rmet) (caps-word-toggle 3000) $combo-term-slow all-released (mod numsym hax)
+  ;;(lmet rmet) (caps-word-toggle 3000) $combo-term-slow all-released (mod numsym hax)
 
   (lmet spc) @l_numsym $combo-term all-released (mod numsym hax)
   (rmet spc) @l_numsym $combo-term all-released (mod numsym hax)
   ;;(spc lsft) @l_mod $combo-term all-released (mod numsym hax)
   ;;(spc rmet) @l_mod $combo-term all-released (mod numsym hax)
 
-  (1 2 - =) @switch_to_plain $combo-term all-released (mod numsym hax plain)
-  (1 2 [ ]) @switch_to_base $combo-term all-released (mod numsym hax base)
+  ;;(1 2 - =) @switch_to_plain $combo-term all-released (mod numsym hax plain)
+  ;;(1 2 [ ]) @switch_to_base $combo-term all-released (mod numsym hax base)
 )
 
 (deflayer base
@@ -166,7 +166,7 @@
   tab q  w  e  r  t            y u i o @p [ ] \
   @ossft @a @s @d @f @g            @h @j @k @l @; @ossft ret
   @ossft z  x  c  @v  b            n @m , . / @ossft
-  XX XX XX @bspcmet   spc    @ret XX
+  XX XX XX @bspcmet   @spcft    @ret XX
 )
 
 (deflayer mod
