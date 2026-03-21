@@ -99,7 +99,7 @@
 
   ret (t! charmod ret lsft)
 
-  spcft (tap-hold-release $tap-time $hold-time spc lsft)
+  spcft (tap-hold-release 100 145 spc lsft)
   bspcmet (tap-hold $tap-time $hold-time bspc lmet)
 
   ;; mod layer mods
@@ -153,6 +153,9 @@
 
   (lmet spc) @l_numsym $combo-term all-released (mod numsym hax)
   (rmet spc) @l_numsym $combo-term all-released (mod numsym hax)
+  ;; Left hand thumbs for ext kb with two thumb keys per hand
+  (lmet lsft) @l_numsym $combo-term all-released (mod numsym hax)
+
   ;;(spc lsft) @l_mod $combo-term all-released (mod numsym hax)
   ;;(spc rmet) @l_mod $combo-term all-released (mod numsym hax)
 
@@ -172,7 +175,7 @@
 (deflayer mod
   esc     🔅    🔆  XX   XX  XX           XX  ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
   XX  XX  XX  XX  XX  XX  XX             XX XX XX XX XX XX XX
-  XX _ _ A-M-i  S-M-4       esc                      ▶⏸ 🔉 up 🔊 🔇 XX XX XX 
+  XX _ _ A-M-i  S-M-4       esc                      XX XX up XX XX XX XX XX 
   XX esc @tabback @emoji @tabfwd bspc     bspc left down right esc _ XX 
   XX _ spc tab ret del                     del ret tab spc _ _
   XX XX XX _    _       _ XX
