@@ -5,6 +5,7 @@
   caps           a    s    d    f    g       h    j    k    l    ;       '    ret
   lsft        z    x    c    v    b       n    m    ,    .    /       rsft
   fn lctl           lalt lmet          spc            rmet ralt
+  f13 f14
 )
 
 ;; This file includes sensitive key bindings that should not be committed to the repo
@@ -38,17 +39,19 @@
   mouse-move-accel-max 500
 
   charmod-term 55
-  charmodslow-term 85
+  charmodslow-term 120
 
   left-hand-keys (
     q w e r t
     a s d f g
     z x c v b
+    spc
   )
   right-hand-keys (
     y u i o p
     h j k l ;
     n m , . /
+    spc
   )
 )
 
@@ -70,6 +73,9 @@
   l_mod (layer-while-held mod)
   l_numsym (layer-while-held numsym)
   l_hax (layer-while-held hax)
+  l_mouse (layer-while-held mouse)
+  l_mouseslow (layer-while-held mouseslow)
+  l_mousefast (layer-while-held mousefast)
 
   switch_to_plain (layer-switch plain)
   switch_to_base (layer-switch base)
@@ -97,7 +103,8 @@
 
   p (t! charmodslow p @l_hax)
 
-  ret (t! charmod ret lsft)
+  retsft (t! charmod ret lsft)
+  retmet (t! charmod ret rmet)
 
   spcft (tap-hold-release 100 145 spc lsft)
   bspcmet (tap-hold $tap-time $hold-time bspc lmet)
@@ -132,6 +139,35 @@
 
   ;; misc
   ossft (one-shot-press 2000 lsft)
+
+  ;; mouse stuff
+  mwu (mwheel-down 50 3)
+  mwd (mwheel-up 50 3)
+
+  mwus (mwheel-down 50 1)
+  mwds (mwheel-up 50 1)
+
+  mwuf (mwheel-down 50 10)
+  mwdf (mwheel-up 50 10)
+
+  ma↑ (movemouse-accel-up 1 1000 1 5)
+  ma← (movemouse-accel-left 1 1000 1 5)
+  ma↓ (movemouse-accel-down 1 1000 1 5)
+  ma→ (movemouse-accel-right 1 1000 1 5)
+
+  mas↑ (movemouse-accel-up 10 1000 1 5)
+  mas← (movemouse-accel-left 10 1000 1 5)
+  mas↓ (movemouse-accel-down 10 1000 1 5)
+  mas→ (movemouse-accel-right 10 1000 1 5)
+
+  maf↑ (movemouse-accel-up 1 500 1 10)
+  maf← (movemouse-accel-left 1 500 1 10)
+  maf↓ (movemouse-accel-down 1 500 1 10)
+  maf→ (movemouse-accel-right 1 500 1 10)
+
+  mbtn1 (t! charmod mltp mlft)
+  mbtn2 (t! charmod mrtp mrgt)
+  mbtn3 (t! charmod mmtp mmid)
 )
 
 ;; Combos
@@ -169,16 +205,18 @@
   tab q  w  e  r  t            y u i o @p [ ] \
   @ossft @a @s @d @f @g            @h @j @k @l @; @ossft ret
   @ossft z  x  c  @v  b            n @m , . / @ossft
-  XX XX XX @bspcmet   @spcft    @ret XX
+  XX XX @l_mouse @bspcmet   spc   @retsft XX
+  @l_mouse @l_mouse
 )
 
 (deflayer mod
   esc     🔅    🔆  XX   XX  XX           XX  ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
   XX  XX  XX  XX  XX  XX  XX             XX XX XX XX XX XX XX
-  XX _ _ A-M-i  S-M-4       esc                      XX XX up XX XX XX XX XX 
+  XX _ _ A-M-i  _       esc                      XX XX up XX XX XX XX XX 
   XX esc @tabback @emoji @tabfwd bspc     bspc left down right esc _ XX 
   XX _ spc tab ret del                     del ret tab spc _ _
   XX XX XX _    _       _ XX
+  XX XX
 )
 
 (deflayer numsym
@@ -188,6 +226,7 @@
   XX _ @ns-s @ns-d @ns-f @ns-g           ' @ns-j @ns-k S-, S-. _ XX
   @ossft _ 1 2 3 .                       ` - = \ ' _
   XX XX XX _              _          _ XX
+  XX XX
 )
 
 (deflayer hax
@@ -196,7 +235,8 @@
   tab @pw  w  e  r  t            y u i o p [ ] \
   @ossft @a @s @d @f @g            @h @j @k @l @; @ossft ret
   XX z  x  c  v  b            n m , . / XX
-  XX XX XX @bspcmet   spc    @ret XX
+  XX XX XX @bspcmet   spc    @retsft XX
+  XX XX
 )
 
 (deflayer plain
@@ -206,4 +246,35 @@
   esc a s d f g            h j k l ; ' ret
   lsft z x c v b           n m , . / rsft
   fn lctl lalt lmet spc    rmet ralt
+  XX XX
+)
+
+(deflayer mouse
+  esc     🔅    🔆  XX   XX  XX           XX  ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
+  XX  XX  XX  XX  XX  XX  XX             XX XX XX XX XX XX XX
+  XX _ _ _ _ _                       @mwu XX @ma↑  XX XX XX XX XX
+  XX @l_mouseslow @mbtn3 @mbtn2 @mbtn1 _                       @mwd @ma← @ma↓ @ma→ XX XX XX 
+  XX @l_mousefast _ _ _ _                       _ _ _ _ _ _
+  XX XX XX _    _       _ XX
+  XX XX
+)
+
+(deflayer mouseslow
+  esc     🔅    🔆  XX   XX  XX           XX  ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
+  XX  XX  XX  XX  XX  XX  XX             XX XX XX XX XX XX XX
+  XX _ _ _ _ _                       @mwus XX @mas↑  XX XX XX XX XX
+  XX _ _ _ _ _                        @mwds @mas← @mas↓ @mas→ XX XX XX 
+  XX _ _ _ _ _                         _ _ _ _ _ _
+  XX XX XX _    _       _ XX
+  XX XX
+)
+
+(deflayer mousefast
+  esc     🔅    🔆  XX   XX  XX           XX  ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
+  XX  XX  XX  XX  XX  XX  XX             XX XX XX XX XX XX XX
+  XX _ _ _ _ _                       @mwuf XX @maf↑  XX XX XX XX XX
+  XX _ _ _ _ _                        @mwdf @maf← @maf↓ @maf→ XX XX XX 
+  XX _ _ _ _ _                         _ _ _ _ _ _
+  XX XX XX _    _       _ XX
+  XX XX
 )
