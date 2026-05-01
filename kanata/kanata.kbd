@@ -14,10 +14,6 @@
 (defcfg
   process-unmapped-keys yes 
   concurrent-tap-hold yes
-
-  ;;macos-dev-names-exclude (
-    ;;"Voyager"
-  ;;)
 )
 
 (defvar
@@ -69,6 +65,13 @@
   )
 )
 
+(deftemplate charmodSlowNoRelease (char mod)
+  (switch 
+    ((key-timing 3 less-than $charmodslow-term)) $char break
+    () (tap-hold $tap-time $hold-time-slow $char $mod ) break
+  )
+)
+
 (defalias
   l_mod (layer-while-held mod)
   l_numsym (layer-while-held numsym)
@@ -101,7 +104,7 @@
   m (t! charmod m @l_numsym)
   v (t! charmod v @l_numsym)
 
-  p (t! charmodslow p @l_hax)
+  p (t! charmodSlowNoRelease p @l_hax)
 
   retsft (t! charmod ret lsft)
   retmet (t! charmod ret rmet)
@@ -190,7 +193,7 @@
   (lmet spc) @l_numsym $combo-term all-released (mod numsym hax)
   (rmet spc) @l_numsym $combo-term all-released (mod numsym hax)
   ;; Left hand thumbs for ext kb with two thumb keys per hand
-  (lmet lsft) @l_numsym $combo-term all-released (mod numsym hax)
+  (lmet lsft) @l_mouse $combo-term all-released (mod numsym hax)
 
   ;;(spc lsft) @l_mod $combo-term all-released (mod numsym hax)
   ;;(spc rmet) @l_mod $combo-term all-released (mod numsym hax)
@@ -206,7 +209,7 @@
   @ossft @a @s @d @f @g            @h @j @k @l @; @ossft ret
   @ossft z  x  c  @v  b            n @m , . / @ossft
   XX XX @l_mouse @bspcmet   spc   @retsft XX
-  @l_mouse @l_mouse
+  @l_mouse @l_numsym
 )
 
 (deflayer mod
@@ -214,7 +217,7 @@
   XX  XX  XX  XX  XX  XX  XX             XX XX XX XX XX XX XX
   XX _ _ A-M-i  _       esc                      XX XX up XX XX XX XX XX 
   XX esc @tabback @emoji @tabfwd bspc     bspc left down right esc _ XX 
-  XX _ spc tab ret del                     del ret tab spc _ _
+  XX _ spc tab ret S-M-4                     del ret tab spc _ _
   XX XX XX _    _       _ XX
   XX XX
 )
@@ -231,11 +234,11 @@
 
 (deflayer hax
   esc     🔅    🔆    XX   XX  XX  XX  ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
-  ` @pw 2 3 4 5 6          7 8 9 0 - = bspc
-  tab @pw  w  e  r  t            y u i o p [ ] \
-  @ossft @a @s @d @f @g            @h @j @k @l @; @ossft ret
-  XX z  x  c  v  b            n m , . / XX
-  XX XX XX @bspcmet   spc    @retsft XX
+  ` XX XX XX XX XX XX          XX XX XX XX XX XX XX
+  XX @pw _ _ ▶⏸ _            _ _ _ _ _ XX XX XX
+  XX _ _ 🔉 🔊 _            _ _ _ _ _ XX XX
+  XX _ _ _ _ _            _ _ _ _ _ XX
+  XX XX XX _   _    _ XX
   XX XX
 )
 
@@ -277,4 +280,4 @@
   XX _ _ _ _ _                         _ _ _ _ _ _
   XX XX XX _    _       _ XX
   XX XX
-)
+) 
