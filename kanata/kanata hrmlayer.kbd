@@ -79,6 +79,7 @@
   l_mouse (layer-while-held mouse)
   l_mouseslow (layer-while-held mouseslow)
   l_mousefast (layer-while-held mousefast)
+  l_switchboard (layer-while-held switchboard)
 
   switch_to_plain (layer-switch plain)
   switch_to_base (layer-switch base)
@@ -205,11 +206,21 @@
 (deflayer base
   esc     🔅    🔆    XX   XX  XX  XX  ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
   ` 1 2 3 4 5 6          7 8 9 0 - = bspc
-  tab q  w  e  r  t            y u i o @p [ ] \
-  @ossft @a @s @d @f @g            @h @j @k @l @; @ossft ret
-  @ossft z  x  c  @v  b            n @m , . / @ossft
+  tab q  w  e  r  t            y u i o p [ ] \
+  @ossft a s d f g            h j k l ; @ossft ret
+  @ossft z  x  c  v  b            n m , . / @ossft
   XX XX @l_mouse @bspcmet   spc   @retsft XX
-  @l_mouse @l_numsym
+  @l_switchboard @l_switchboard
+)
+
+(deflayer switchboard
+  esc     🔅    🔆  XX   XX  XX           XX  ◀◀    ▶⏸    ▶▶    🔇    🔉    🔊
+  XX  XX  XX  XX  XX  XX  XX             XX XX XX XX XX XX XX
+  XX _ _ _ _ _                       _ _ _ _ @l_hax XX XX XX
+  XX @l_mod lalt lsft lmet lctl      rctl rmet rsft ralt @l_mod XX XX 
+  XX _ _ _ @l_numsym _                       _ @l_numsym _ _ _ XX
+  XX XX XX _    _       _ XX
+  @l_mouse @l_mouse
 )
 
 (deflayer mod
